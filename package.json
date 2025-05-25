@@ -1,0 +1,40 @@
+{
+    "name": "junction-engine",
+    "version": "2.0.0",
+    "description": "",
+    "packageManager": "npm@10.9.2",
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev",
+        "lint": "turbo run lint",
+        "test": "turbo run test",
+        "format": "prettier --write .",
+        "format:check": "prettier --check ."
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,json,css,md}": [
+            "prettier --write"
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/joshuamotoaki/junction-engine.git"
+    },
+    "keywords": [],
+    "author": "TigerApps",
+    "license": "BSD-3-Clause",
+    "bugs": {
+        "url": "https://github.com/joshuamotoaki/junction-engine/issues"
+    },
+    "homepage": "https://github.com/joshuamotoaki/junction-engine#readme",
+    "devDependencies": {
+        "husky": "^9.1.7",
+        "lint-staged": "^16.0.0",
+        "prettier": "^3.5.3",
+        "turbo": "^2.5.3"
+    }
+}
