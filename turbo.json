@@ -11,10 +11,14 @@
             "persistent": true
         },
         "lint": {},
+        "lint:fix": {
+            "cache": false
+        },
         "test": {},
         "format": {
             "cache": false
         },
-        "format:check": {}
+        "format:check": {},
+        "typecheck": {}
     }
 }

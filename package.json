@@ -2,6 +2,8 @@
     "name": "junction-engine",
     "version": "2.0.0",
     "description": "",
+    "type": "module",
+    "private": true,
     "packageManager": "npm@10.9.2",
     "workspaces": [
         "apps/*",
@@ -11,12 +13,18 @@
         "build": "turbo run build",
         "dev": "turbo run dev",
         "lint": "turbo run lint",
+        "lint:fix": "turbo run lint:fix",
         "test": "turbo run test",
         "format": "prettier --write .",
-        "format:check": "prettier --check ."
+        "format:check": "prettier --check .",
+        "typecheck": "turbo run typecheck"
     },
     "lint-staged": {
-        "*.{js,jsx,ts,tsx,json,css,md}": [
+        "*.{js,jsx,ts,tsx}": [
+            "eslint --fix",
+            "prettier --write"
+        ],
+        "*.{json,css,md,html}": [
             "prettier --write"
         ]
     },
@@ -32,6 +40,14 @@
     },
     "homepage": "https://github.com/joshuamotoaki/junction-engine#readme",
     "devDependencies": {
+        "@eslint/js": "^9.27.0",
+        "@typescript-eslint/eslint-plugin": "^8.32.1",
+        "@typescript-eslint/parser": "^8.32.1",
+        "eslint": "^9.27.0",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-plugin-prettier": "^5.4.0",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^5.2.0",
         "husky": "^9.1.7",
         "lint-staged": "^16.0.0",
         "prettier": "^3.5.3",
