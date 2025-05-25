@@ -13,12 +13,16 @@
         "format:check": "prettier --check ."
     },
     "dependencies": {
+        "@phosphor-icons/react": "^2.1.10",
         "@react-router/node": "^7.5.3",
         "@react-router/serve": "^7.5.3",
         "isbot": "^5.1.27",
+        "motion": "^12.12.2",
         "react": "^19.1.0",
+        "react-aria-components": "^1.9.0",
         "react-dom": "^19.1.0",
-        "react-router": "^7.5.3"
+        "react-router": "^7.5.3",
+        "zustand": "^5.0.5"
     },
     "devDependencies": {
         "@react-router/dev": "^7.5.3",

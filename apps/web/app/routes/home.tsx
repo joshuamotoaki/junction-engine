@@ -1,5 +1,4 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 // eslint-disable-next-line no-empty-pattern
 export function meta({}: Route.MetaArgs) {
@@ -10,5 +9,11 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-    return <Welcome />;
+    return (
+        <div className="flex flex-col items-center justify-center h-screen">
+            <p className="text-gray-500 mt-4">
+                This is a simple React Router application.
+            </p>
+        </div>
+    );
 }
