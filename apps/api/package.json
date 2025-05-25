@@ -1,22 +1,22 @@
 {
-    "name": "api",
-    "version": "1.0.50",
-    "type": "module",
-    "private": true,
-    "scripts": {
-        "dev": "bun run --watch src/index.ts",
-        "build": "bun run build src/index.ts --outdir=./dist",
-        "start": "bun run dist/index.js",
-        "lint": "eslint . --ext .js,.ts",
-        "lint:fix": "eslint . --ext .js,.ts --fix",
-        "format": "prettier --write .",
-        "format:check": "prettier --check ."
-    },
-    "dependencies": {
-        "elysia": "latest"
-    },
-    "devDependencies": {
-        "bun-types": "latest"
-    },
-    "module": "src/index.js"
+  "name": "api",
+  "version": "1.0.50",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "build": "bun run build src/index.ts --outdir=./dist",
+    "start": "bun run dist/index.js",
+    "lint": "eslint . --ext .js,.ts",
+    "lint:fix": "eslint . --ext .js,.ts --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "module": "src/index.js"
 }
