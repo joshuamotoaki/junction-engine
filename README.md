@@ -1,6 +1,6 @@
 # TigerJunction Engine
 
-TODO - Add project description
+WIP TigerJunction 2.0. For now, see the old [TigerJunction 1.0](https://github.com/TigerAppsOrg/tiger-junction) repository.
 
 ## 🏗️ Architecture
 
