@@ -5,29 +5,9 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
 
     const footerLinks = {
-        product: [
-            { name: "Features", href: "#" },
-            { name: "Pricing", href: "#" },
-            { name: "API", href: "#" },
-            { name: "Integrations", href: "#" },
-        ],
-        company: [
-            { name: "About", href: "#" },
-            { name: "Blog", href: "#" },
-            { name: "Careers", href: "#" },
-            { name: "Press", href: "#" },
-        ],
-        resources: [
-            { name: "Documentation", href: "#" },
-            { name: "Support", href: "#" },
-            { name: "Status", href: "#" },
-            { name: "Changelog", href: "#" },
-        ],
         legal: [
-            { name: "Terms of Service", href: "#" },
-            { name: "Privacy Policy", href: "#" },
-            { name: "Cookie Policy", href: "#" },
-            { name: "GDPR", href: "#" },
+            { name: "Terms of Service", href: "/tos" },
+            { name: "Privacy Policy", href: "/privacy" },
         ],
     };
 
@@ -70,60 +50,6 @@ const Footer = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
                     <div>
                         <h4 className="text-xs tracking-wider text-gray-500 mb-4">
-                            PRODUCT
-                        </h4>
-                        <ul className="space-y-2">
-                            {footerLinks.product.map((link) => (
-                                <li key={link.name}>
-                                    <a
-                                        href={link.href}
-                                        className="text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                                    >
-                                        {link.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 className="text-xs tracking-wider text-gray-500 mb-4">
-                            COMPANY
-                        </h4>
-                        <ul className="space-y-2">
-                            {footerLinks.company.map((link) => (
-                                <li key={link.name}>
-                                    <a
-                                        href={link.href}
-                                        className="text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                                    >
-                                        {link.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 className="text-xs tracking-wider text-gray-500 mb-4">
-                            RESOURCES
-                        </h4>
-                        <ul className="space-y-2">
-                            {footerLinks.resources.map((link) => (
-                                <li key={link.name}>
-                                    <a
-                                        href={link.href}
-                                        className="text-sm text-gray-700 hover:text-gray-900 transition-colors"
-                                    >
-                                        {link.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 className="text-xs tracking-wider text-gray-500 mb-4">
                             LEGAL
                         </h4>
                         <ul className="space-y-2">
@@ -154,14 +80,6 @@ const Footer = () => {
                             className="text-gray-500 hover:text-gray-900 transition-colors"
                         >
                             <span className="text-xs tracking-wider">
-                                TWITTER
-                            </span>
-                        </a>
-                        <a
-                            href="#"
-                            className="text-gray-500 hover:text-gray-900 transition-colors"
-                        >
-                            <span className="text-xs tracking-wider">
                                 GITHUB
                             </span>
                         </a>
@@ -170,7 +88,7 @@ const Footer = () => {
                             className="text-gray-500 hover:text-gray-900 transition-colors"
                         >
                             <span className="text-xs tracking-wider">
-                                LINKEDIN
+                                TIGERAPPS
                             </span>
                         </a>
                     </div>
