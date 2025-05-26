@@ -1,9 +1,7 @@
-import React from "react";
 import { motion } from "framer-motion";
+import { GITHUB_URL } from "~/utils/constants";
 
 const Footer = () => {
-    const currentYear = new Date().getFullYear();
-
     const footerLinks = {
         legal: [
             { name: "Terms of Service", href: "/tos" },
@@ -21,7 +19,11 @@ const Footer = () => {
                             TIGERJUNCTION
                         </h3>
                         <p className="text-sm text-gray-500 mt-2 max-w-xs">
-                            Building the future of collaborative innovation.
+                            Princeton academic planning,{" "}
+                            <span className="font-telegraf-slanted font-bold">
+                                amplified
+                            </span>
+                            .
                         </p>
                     </div>
 
@@ -70,22 +72,28 @@ const Footer = () => {
                 {/* Bottom section */}
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-200">
                     <p className="text-xs text-gray-500 mb-4 md:mb-0">
-                        © {currentYear} TigerJunction. All rights reserved.
+                        © 2023 TigerApps. All rights reserved.
                     </p>
 
                     {/* Social links */}
                     <div className="flex items-center gap-6">
                         <a
-                            href="#"
+                            target="_blank"
+                            referrerPolicy="no-referrer"
+                            href={GITHUB_URL}
                             className="text-gray-500 hover:text-gray-900 transition-colors"
+                            rel="noreferrer"
                         >
                             <span className="text-xs tracking-wider">
                                 GITHUB
                             </span>
                         </a>
                         <a
-                            href="#"
+                            target="_blank"
+                            referrerPolicy="no-referrer"
+                            href="https://tigerapps.org"
                             className="text-gray-500 hover:text-gray-900 transition-colors"
+                            rel="noreferrer"
                         >
                             <span className="text-xs tracking-wider">
                                 TIGERAPPS

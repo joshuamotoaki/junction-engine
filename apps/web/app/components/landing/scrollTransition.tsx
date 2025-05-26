@@ -70,12 +70,12 @@ const ScrollTransition = () => {
                 >
                     <div className="text-center">
                         <h2 className="text-[10vw] font-light text-gray-900 leading-none tracking-tighter">
-                            EXPLORE
+                            FOUR APPS
                         </h2>
                         <div className="mt-4 flex items-center justify-center gap-4">
                             <div className="w-20 h-[1px] bg-gray-400" />
                             <span className="text-xs tracking-[0.2em] text-gray-500">
-                                THE POSSIBILITIES
+                                one experience
                             </span>
                             <div className="w-20 h-[1px] bg-gray-400" />
                         </div>

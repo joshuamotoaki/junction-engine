@@ -11,31 +11,31 @@ const FeaturesSection = () => {
     const features = [
         {
             id: "01",
-            title: "NEURAL SYNC",
+            title: "Smart Scheduling",
             description:
                 "Real-time collaborative intelligence that adapts to your workflow, learning from patterns and anticipating needs before they arise",
-            tag: "INTELLIGENCE",
+            tag: "ReCal+",
         },
         {
             id: "02",
-            title: "QUANTUM MESH",
+            title: "Multi-Year Insights",
             description:
                 "Distributed processing across infinite computational nodes, creating a seamless network that scales beyond traditional limitations",
-            tag: "INFRASTRUCTURE",
+            tag: "CourseGenie",
         },
         {
             id: "03",
-            title: "VOID PROTOCOL",
+            title: "Amplified Course Reviews",
             description:
                 "Zero-latency communication through dimensional barriers, enabling instant synchronization across any distance or platform",
-            tag: "CONNECTIVITY",
+            tag: "PrincetonCourses+",
         },
         {
             id: "04",
-            title: "FLUX ENGINE",
+            title: "Instant Notifications",
             description:
                 "Dynamic resource allocation with predictive scaling that automatically optimizes performance based on real-time demand patterns",
-            tag: "PERFORMANCE",
+            tag: "TigerSnatch+",
         },
     ];
 
@@ -106,7 +106,7 @@ const FeaturesSection = () => {
                     }}
                 >
                     <h2 className="text-[8vw] font-black leading-none tracking-tighter text-gray-900">
-                        FEATURES
+                        APPS
                     </h2>
                     <div className="mt-2 flex items-center gap-2">
                         <span className="text-[10px] tracking-wider text-gray-400">
