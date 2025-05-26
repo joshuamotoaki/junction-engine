@@ -132,9 +132,15 @@ const HeroSection = () => {
                     transition={{ delay: 0.8 }}
                 >
                     <p className="text-sm leading-relaxed text-gray-600">
-                        Where <span className="font-bold">innovation</span>{" "}
-                        meets <span className="italic">excellence</span>. Build
-                        something extraordinary.
+                        Princeton&apos;s{" "}
+                        <span className="font-bold font-telegraf-slanted">
+                            premier
+                        </span>{" "}
+                        academic planning platform, completely{" "}
+                        <span className="font-telegraf-slanted">
+                            reimagined
+                        </span>
+                        . Transform how you navigate your academic journey.
                     </p>
                     <div className="mt-4 flex items-center gap-2">
                         <span className="text-[10px] tracking-wider text-gray-400">

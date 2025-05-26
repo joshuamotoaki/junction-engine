@@ -1,16 +1,14 @@
+@import "./fonts.css";
 @import "tailwindcss";
 
 @theme {
-    --font-sans:
-        "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-telegraf: "PPTelegraf", sans-serif;
+    --font-telegraf-slanted: "PPTelegrafSlanted", sans-serif;
+    --font-weight-ultralight: 200;
+    --font-weight-regular: 400;
+    --font-weight-ultrabold: 800;
 }
 
-html,
 body {
-    @apply bg-white dark:bg-gray-950;
-
-    @media (prefers-color-scheme: dark) {
-        color-scheme: dark;
-    }
+    @apply font-telegraf;
 }
