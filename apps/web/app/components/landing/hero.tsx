@@ -226,7 +226,7 @@ const HeroSection = () => {
             {/* Side text */}
             <div className="absolute top-0 right-0 h-full w-12 flex items-center justify-center">
                 <div className="transform rotate-90 text-xs tracking-[0.3em] text-gray-400">
-                    TIGERAPPS © 2025
+                    TIGERAPPS © 2023
                 </div>
             </div>
         </section>
