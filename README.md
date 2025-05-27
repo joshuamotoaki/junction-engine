@@ -1,6 +1,6 @@
 # TigerJunction Engine
 
-WIP TigerJunction 2.0. For now, see the old [TigerJunction 1.0](https://github.com/TigerAppsOrg/tiger-junction) repository.
+WIP TigerJunction 2.0. For the current production version, see the old [TigerJunction 1.0](https://github.com/TigerAppsOrg/tiger-junction) repository.
 
 ## 🏗️ Architecture
 
@@ -34,7 +34,7 @@ junction-engine/
 │   └── api/          # Elysia backend (port 3000)
 ├── packages/
 │   └── shared/       # Shared utilities
-└── turbo.json        # Turborepo configuration
+└── <root>            # Config files
 ```
 
 ## 📦 Available Scripts
@@ -45,11 +45,11 @@ junction-engine/
 - `npm run format` - Format code with Prettier
 - `npm run typecheck` - Run TypeScript type checking
 
-Code is automatically formatted and linted on commit via Husky pre-commit hooks.
+Code is automatically formatted and linted on commit via Husky pre-commit hooks. Use the command line to run git commands, the VSCode GUI may cause problems.
 
 ## 🤝 Contributing
 
-TODO: Add contribution guidelines
+Reach out to Joshua at motoaki@princeton.edu if you're interested in contributing!
 
 ## ⚖️ License
 
