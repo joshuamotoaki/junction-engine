@@ -156,15 +156,18 @@ const HeroSection = () => {
 
                 {/* Scattered UI elements */}
                 <motion.div
-                    className="absolute top-[25%] left-[50%] -translate-x-1/2"
+                    className="absolute top-[25%] left-[50%] -translate-x-1/2 cursor-pointer"
                     style={{ y: y2 }}
                     whileHover={{ scale: 1.1 }}
                 >
-                    <div className="w-32 h-32 border border-gray-300 rounded-full flex items-center justify-center">
+                    <a
+                        href="/recalplus"
+                        className="w-32 h-32 border border-gray-300 rounded-full flex items-center justify-center"
+                    >
                         <span className="text-xs tracking-wider text-gray-500">
                             ENTER
                         </span>
-                    </div>
+                    </a>
                 </motion.div>
 
                 {/* Navigation style CTA */}
