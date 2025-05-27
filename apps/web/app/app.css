@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 @theme {
-    /* Color */
+    /* Colors */
     --color-light: #f0f0f0;
     --color-light-accent: #e0e0e0;
     --color-light-muted: #d0d0d0;
@@ -10,10 +10,33 @@
     --color-dark-accent: #333333;
     --color-dark-muted: #444444;
 
-    /* TODO: Ensure that dark/light have enough contrast */
-    --color-red-std: #e63946;
-    --color-red-dark: #a31621;
-    --color-red-light: #ffcccb;
+    --color-red-std: #e53e3e;
+    --color-red-dark: #b91c1c;
+    --color-red-light: #fee2e2;
+
+    --color-orange-std: #f59e0b;
+    --color-orange-dark: #c27803;
+    --color-orange-light: #fffbeb;
+
+    --color-yellow-std: #eab308;
+    --color-yellow-dark: #a16207;
+    --color-yellow-light: #fefce8;
+
+    --color-green-std: #22c55e;
+    --color-green-dark: #15803d;
+    --color-green-light: #f0fdf4;
+
+    --color-blue-std: #3b82f6;
+    --color-blue-dark: #1d4ed8;
+    --color-blue-light: #eff6ff;
+
+    --color-indigo-std: #6366f1;
+    --color-indigo-dark: #4338ca;
+    --color-indigo-light: #eef2ff;
+
+    --color-violet-std: #8b5cf6;
+    --color-violet-dark: #6d28d9;
+    --color-violet-light: #f5f3ff;
 
     /* Typography */
     --font-telegraf: "PPTelegraf", sans-serif;
