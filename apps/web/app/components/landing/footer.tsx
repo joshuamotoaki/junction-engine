@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { GITHUB_URL } from "~/utils/constants";
+import { GITHUB_URL, RELEASE_YEAR } from "~/utils/constants";
 
 const Footer = () => {
     const footerLinks = {
@@ -72,7 +72,7 @@ const Footer = () => {
                 {/* Bottom section */}
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-200">
                     <p className="text-xs text-gray-500 mb-4 md:mb-0">
-                        © 2023 TigerApps. All rights reserved.
+                        © {RELEASE_YEAR} TigerApps. All rights reserved.
                     </p>
 
                     {/* Social links */}

@@ -6,6 +6,7 @@ import {
     useMotionValue,
     useSpring,
 } from "motion/react";
+import { RELEASE_YEAR } from "~/utils/constants";
 
 const HeroSection = () => {
     const containerRef = useRef(null);
@@ -78,7 +79,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 1.2 }}
             >
-                EST. 2023
+                EST. {RELEASE_YEAR}
             </motion.div>
 
             <motion.div
@@ -226,7 +227,7 @@ const HeroSection = () => {
             {/* Side text */}
             <div className="absolute top-0 right-0 h-full w-12 flex items-center justify-center">
                 <div className="transform rotate-90 text-xs tracking-[0.3em] text-gray-400">
-                    TIGERAPPS © 2023
+                    TIGERAPPS © {RELEASE_YEAR}
                 </div>
             </div>
         </section>
