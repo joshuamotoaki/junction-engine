@@ -2,6 +2,20 @@
 @import "tailwindcss";
 
 @theme {
+    /* Color */
+    --color-light: #f0f0f0;
+    --color-light-accent: #e0e0e0;
+    --color-light-muted: #d0d0d0;
+    --color-dark: #242424;
+    --color-dark-accent: #333333;
+    --color-dark-muted: #444444;
+
+    /* TODO: Ensure that dark/light have enough contrast */
+    --color-red-std: #e63946;
+    --color-red-dark: #a31621;
+    --color-red-light: #ffcccb;
+
+    /* Typography */
     --font-telegraf: "PPTelegraf", sans-serif;
     --font-telegraf-slanted: "PPTelegrafSlanted", sans-serif;
     --font-weight-ultralight: 200;
@@ -11,4 +25,5 @@
 
 body {
     @apply font-telegraf;
+    @apply bg-light text-dark;
 }

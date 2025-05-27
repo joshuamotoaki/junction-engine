@@ -11,7 +11,7 @@ export function meta() {
 export default function Landing() {
     return (
         <div className="relative">
-            <div className="fixed inset-0 bg-gradient-to-b from-white via-gray-50 to-white -z-50" />
+            <div className="fixed inset-0 -z-50" />
             <Hero />
             <ScrollTransition />
             <FeaturesSection />

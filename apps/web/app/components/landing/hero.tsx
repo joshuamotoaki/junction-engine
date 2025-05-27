@@ -39,7 +39,7 @@ const HeroSection = () => {
     return (
         <section
             ref={containerRef}
-            className="relative min-h-screen overflow-hidden bg-white"
+            className="relative min-h-screen overflow-hidden"
         >
             {/* Grain texture */}
             <div className="absolute inset-0 opacity-[0.04] mix-blend-multiply pointer-events-none">
