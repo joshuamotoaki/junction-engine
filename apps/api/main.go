@@ -5,7 +5,6 @@ import (
 	"github.com/tigerappsorg/junction-engine/config"
 )
 
-
 func main() {
 	cfg := config.Load()
 	application.Run(cfg)
