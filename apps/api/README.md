@@ -1,19 +1,19 @@
-# Elysia with Bun runtime
+# Junction Engine Backend API
 
 ## Getting Started
 
-To get started with this template, simply paste this command into your terminal:
+Clone the repoistory. Make sure you have Go installed. On MacOS, you can use Homebrew:
 
 ```bash
-bun create elysia ./elysia-example
+brew install go
 ```
 
-## Development
-
-To start the development server run:
+If you don't have Go installed, you can download it from the [official Go website](https://golang.org/dl/). You will also want to install [Air](https://github.com/air-verse/air) for hot-reloading during development.
 
 ```bash
-bun run dev
-```
+# Install dependencies
+go mod tidy
 
-Open http://localhost:3000/ with your browser to see the result.
+# Run a hot-reloading development server
+make dev
+```
