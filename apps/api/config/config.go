@@ -1,26 +1,46 @@
 package config
 
 import (
+	"log"
 	"os"
+	"strconv"
+	"time"
 
 	"github.com/joho/godotenv"
 )
 
 type Config struct {
+	AppURL string `env:"APP_URL"`
+
+	// Database
 	NEO4J_URI      string `env:"NEO4J_URI"`
 	NEO4J_USERNAME string `env:"NEO4J_USERNAME"`
 	NEO4J_PASSWORD string `env:"NEO4J_PASSWORD"`
+
+	// Authentication
+	CASServerURL string        `env:"CAS_SERVER_URL"`
+	JWTSecret    string        `env:"JWT_SECRET"`
+	JWTExpiry    time.Duration `env:"JWT_EXPIRY"`
 }
 
 func Load() *Config {
-	godotenv.Load()
+	err := godotenv.Load()
+	if err != nil {
+		log.Printf("Error loading .env file: %v", err)
+	}
+
+	jwtExpiryHours, _ := strconv.Atoi(getEnv("JWT_EXPIRY_HOURS", "24"))
 
 	return &Config{
 		NEO4J_URI:      getEnv("NEO4J_URI", "bolt://localhost:7687"),
 		NEO4J_USERNAME: getEnv("NEO4J_USERNAME", "neo4j"),
 		NEO4J_PASSWORD: getEnv("NEO4J_PASSWORD", "password123"),
-	}
 
+		AppURL:       getEnv("APP_URL", "http://localhost:8080"),
+		CASServerURL: getEnv("CAS_SERVER_URL", "https://fed.princeton.edu/cas/"),
+		JWTSecret:    getEnv("JWT_SECRET", "your-secret-key-change-this-in-production"),
+		JWTExpiry:    time.Duration(jwtExpiryHours) * time.Hour,
+	}
 }
 
 func getEnv(key, defaultValue string) string {

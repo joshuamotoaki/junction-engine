@@ -30,7 +30,10 @@ func NewNeo4j(uri, username, password string) (*Neo4jDB, error) {
 	ctx := context.Background()
 	err = driver.VerifyConnectivity(ctx)
 	if err != nil {
-		driver.Close(ctx)
+		err := driver.Close(ctx)
+		if err != nil {
+			return nil, fmt.Errorf("failed to close driver after connectivity check failure: %w", err)
+		}
 		return nil, fmt.Errorf("failed to verify connectivity: %w", err)
 	}
 
