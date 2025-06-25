@@ -11,6 +11,8 @@ import (
 
 type Config struct {
 	// Server
+	Debug bool   `env:"DEBUG"` 
+	Env    string `env:"ENV"` // e.g., development, production
 	Port   string `env:"PORT"`
 	AppURL string `env:"APP_URL"`
 
@@ -34,6 +36,8 @@ func Load() *Config {
 	jwtExpiryHours, _ := strconv.Atoi(getEnv("JWT_EXPIRY_HOURS", "24"))
 
 	return &Config{
+		Debug:  getEnv("DEBUG", "false") == "true",
+		Env:    getEnv("ENV", "dev"),
 		Port:   getEnv("PORT", "8080"),
 		AppURL: getEnv("APP_URL", "http://localhost:8080"),
 

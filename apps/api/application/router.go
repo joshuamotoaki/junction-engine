@@ -25,6 +25,12 @@ type Router interface {
 }
 
 func NewRouter(cfg *config.Config, db database.Neo4jDB, casService auth.CASService) Router {
+	if cfg.Env == "dev" {
+		gin.SetMode(gin.DebugMode)
+	} else {
+		gin.SetMode(gin.ReleaseMode)
+	}	
+
 	engine := gin.Default()
 	engine.SetTrustedProxies(nil)
 
