@@ -9,18 +9,24 @@ import (
 	"github.com/tigerappsorg/junction-engine/middleware"
 )
 
-type Router struct {
+type router struct {
 	engine        *gin.Engine
-	authHandler   *handlers.AuthHandler
-	userHandler   *handlers.UserHandler
-	healthHandler *handlers.HealthHandler
-	casService    *auth.CASService
+	authHandler   handlers.AuthHandler
+	userHandler   handlers.UserHandler
+	healthHandler handlers.HealthHandler
+	casService    auth.CASService
 }
 
-func NewRouter(cfg *config.Config, db *database.Neo4jDB, casService *auth.CASService) *Router {
+type Router interface {
+	SetupRoutes()
+	GetEngine() *gin.Engine
+	Run() error
+}
+
+func NewRouter(cfg *config.Config, db database.Neo4jDB, casService auth.CASService) Router {
 	engine := gin.Default()
 
-	return &Router{
+	return &router{
 		engine:        engine,
 		authHandler:   handlers.NewAuthHandler(casService, db, cfg),
 		userHandler:   handlers.NewUserHandler(db),
@@ -29,13 +35,13 @@ func NewRouter(cfg *config.Config, db *database.Neo4jDB, casService *auth.CASSer
 	}
 }
 
-func (r *Router) SetupRoutes() {
+func (r *router) SetupRoutes() {
 	r.setupPublicRoutes()
 	r.setupAuthRoutes()
 	r.setupProtectedRoutes()
 }
 
-func (r *Router) setupPublicRoutes() {
+func (r *router) setupPublicRoutes() {
 	public := r.engine.Group("/")
 	{
 		public.GET("/health", r.healthHandler.Check)
@@ -43,7 +49,7 @@ func (r *Router) setupPublicRoutes() {
 	}
 }
 
-func (r *Router) setupAuthRoutes() {
+func (r *router) setupAuthRoutes() {
 	auth := r.engine.Group("/auth")
 	{
 		auth.GET("/login", r.authHandler.Login)
@@ -52,7 +58,7 @@ func (r *Router) setupAuthRoutes() {
 	}
 }
 
-func (r *Router) setupProtectedRoutes() {
+func (r *router) setupProtectedRoutes() {
 	protected := r.engine.Group("/api")
 	protected.Use(middleware.AuthMiddleware(r.casService))
 	{
@@ -61,10 +67,10 @@ func (r *Router) setupProtectedRoutes() {
 	}
 }
 
-func (r *Router) GetEngine() *gin.Engine {
+func (r *router) GetEngine() *gin.Engine {
 	return r.engine
 }
 
-func (r *Router) Run() error {
+func (r *router) Run() error {
 	return r.engine.Run()
 }

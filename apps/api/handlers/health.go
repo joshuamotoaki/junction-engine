@@ -8,17 +8,22 @@ import (
 	"github.com/tigerappsorg/junction-engine/database"
 )
 
-type HealthHandler struct {
-	db *database.Neo4jDB
+type healthHandler struct {
+	db database.Neo4jDB
 }
 
-func NewHealthHandler(db *database.Neo4jDB) *HealthHandler {
-	return &HealthHandler{
+type HealthHandler interface{
+	Check(c *gin.Context)
+	DatabaseStatus(c *gin.Context)
+}
+
+func NewHealthHandler(db database.Neo4jDB) HealthHandler {
+	return &healthHandler{
 		db: db,
 	}
 }
 
-func (h *HealthHandler) Check(c *gin.Context) {
+func (h *healthHandler) Check(c *gin.Context) {
 	ctx := context.Background()
 	if err := h.db.HealthCheck(ctx); err != nil {
 		c.JSON(http.StatusServiceUnavailable, gin.H{
@@ -34,7 +39,7 @@ func (h *HealthHandler) Check(c *gin.Context) {
 	})
 }
 
-func (h *HealthHandler) DatabaseStatus(c *gin.Context) {
+func (h *healthHandler) DatabaseStatus(c *gin.Context) {
 	ctx := context.Background()
 	if err := h.db.HealthCheck(ctx); err != nil {
 		c.JSON(http.StatusServiceUnavailable, gin.H{

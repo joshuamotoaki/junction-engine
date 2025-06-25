@@ -11,25 +11,32 @@ import (
 	"github.com/tigerappsorg/junction-engine/database"
 )
 
-type AuthHandler struct {
-	casService *auth.CASService
-	db         *database.Neo4jDB
+type authHandler struct {
+	casService auth.CASService
+	db         database.Neo4jDB
 	config     *config.Config
 }
 
-func NewAuthHandler(casService *auth.CASService, db *database.Neo4jDB, cfg *config.Config) *AuthHandler {
-	return &AuthHandler{
+type AuthHandler interface {
+	Login(c *gin.Context)
+	Callback(c *gin.Context)
+	Logout(c *gin.Context)
+	Profile(c *gin.Context)
+}
+
+func NewAuthHandler(casService auth.CASService, db database.Neo4jDB, cfg *config.Config) AuthHandler {
+	return &authHandler{
 		casService: casService,
 		db:         db,
 		config:     cfg,
 	}
 }
 
-func (h *AuthHandler) Login(c *gin.Context) {
+func (h *authHandler) Login(c *gin.Context) {
 	c.Redirect(http.StatusFound, h.casService.GetLoginURL())
 }
 
-func (h *AuthHandler) Callback(c *gin.Context) {
+func (h *authHandler) Callback(c *gin.Context) {
 	ticket := c.Query("ticket")
 	if ticket == "" {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -71,14 +78,14 @@ func (h *AuthHandler) Callback(c *gin.Context) {
 	})
 }
 
-func (h *AuthHandler) Logout(c *gin.Context) {
+func (h *authHandler) Logout(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message":        "Logged out successfully",
 		"cas_logout_url": h.casService.GetLogoutURL(),
 	})
 }
 
-func (h *AuthHandler) Profile(c *gin.Context) {
+func (h *authHandler) Profile(c *gin.Context) {
 	user, exists := c.Get("user")
 	if !exists {
 		c.JSON(http.StatusUnauthorized, gin.H{

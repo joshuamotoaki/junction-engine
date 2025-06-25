@@ -13,34 +13,50 @@ import (
 	"github.com/tigerappsorg/junction-engine/models"
 )
 
-type CASService struct {
-	config *config.Config
+type casService struct {
+	loginURL  string
+	logoutURL string
+	appURL    string
+	casURL    string
+	jwtSecret string
+	jwtExpiry time.Duration
 }
 
-func NewCASService(cfg *config.Config) *CASService {
-	return &CASService{
-		config: cfg,
+type CASService interface {
+	GetLoginURL() string
+	GetLogoutURL() string
+	ValidateTicket(ticket string) (*models.User, error)
+	GenerateJWT(user *models.User) (string, error)
+	ValidateJWT(tokenString string) (*models.JWTClaims, error)
+}
+
+func NewCASService(cfg *config.Config) CASService {
+	loginUrl := fmt.Sprintf("%s/login?service=%s", cfg.CASServerURL, url.QueryEscape(cfg.AppURL+"/auth/callback"))
+	logoutUrl := fmt.Sprintf("%s/logout", cfg.CASServerURL)
+
+	return &casService{
+		loginURL:  loginUrl,
+		logoutURL: logoutUrl,
+		appURL:    cfg.AppURL,
+		casURL:    cfg.CASServerURL,
+		jwtSecret: cfg.JWTSecret,
+		jwtExpiry: cfg.JWTExpiry,
 	}
 }
 
-// GetLoginURL returns the CAS login URL
-func (c *CASService) GetLoginURL() string {
-	serviceURL := c.config.AppURL + "/auth/callback"
-	return fmt.Sprintf("%slogin?service=%s",
-		c.config.CASServerURL,
-		url.QueryEscape(serviceURL))
+func (c *casService) GetLoginURL() string {
+	return c.loginURL
 }
 
-// GetLogoutURL returns the CAS logout URL
-func (c *CASService) GetLogoutURL() string {
-	return fmt.Sprintf("%slogout", c.config.CASServerURL)
+func (c *casService) GetLogoutURL() string {
+	return c.logoutURL
 }
 
-// ValidateTicket validates a CAS ticket and returns user information
-func (c *CASService) ValidateTicket(ticket string) (*models.User, error) {
-	serviceURL := c.config.AppURL + "/auth/callback"
+// Validate a CAS ticket and returns user information
+func (c *casService) ValidateTicket(ticket string) (*models.User, error) {
+	serviceURL := c.appURL + "/auth/callback"
 	validateURL := fmt.Sprintf("%sp3/serviceValidate?service=%s&ticket=%s&format=json",
-		c.config.CASServerURL,
+		c.casURL,
 		url.QueryEscape(serviceURL),
 		url.QueryEscape(ticket))
 
@@ -98,29 +114,29 @@ func (c *CASService) ValidateTicket(ticket string) (*models.User, error) {
 	}, nil
 }
 
-// GenerateJWT creates a JWT token for the user
-func (c *CASService) GenerateJWT(user *models.User) (string, error) {
+// Create a JWT token for the user
+func (c *casService) GenerateJWT(user *models.User) (string, error) {
 	claims := models.JWTClaims{
 		NetID: user.NetID,
 		Email: user.Email,
 		RegisteredClaims: jwt.RegisteredClaims{
-			ExpiresAt: jwt.NewNumericDate(time.Now().Add(c.config.JWTExpiry)),
+			ExpiresAt: jwt.NewNumericDate(time.Now().Add(c.jwtExpiry)),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 			Issuer:    "junction-engine",
 		},
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString([]byte(c.config.JWTSecret))
+	return token.SignedString([]byte(c.jwtSecret))
 }
 
-// ValidateJWT validates a JWT token and returns the user claims
-func (c *CASService) ValidateJWT(tokenString string) (*models.JWTClaims, error) {
+// Validate a JWT token and returns the user claims
+func (c *casService) ValidateJWT(tokenString string) (*models.JWTClaims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &models.JWTClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
-		return []byte(c.config.JWTSecret), nil
+		return []byte(c.jwtSecret), nil
 	})
 
 	if err != nil {

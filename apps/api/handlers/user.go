@@ -7,12 +7,18 @@ import (
 	"github.com/tigerappsorg/junction-engine/database"
 )
 
-type UserHandler struct {
-	db *database.Neo4jDB
+type userHandler struct {
+	db database.Neo4jDB
 }
 
-func NewUserHandler(db *database.Neo4jDB) *UserHandler {
-	return &UserHandler{
+type UserHandler interface {
+	ListUsers(c *gin.Context)
+	UpdateUser(c *gin.Context)
+	DeleteUser(c *gin.Context)
+}
+
+func NewUserHandler(db database.Neo4jDB) UserHandler {
+	return &userHandler{
 		db: db,
 	}
 }
@@ -22,21 +28,21 @@ type CreateUserRequest struct {
 	Email string `json:"email" binding:"required"`
 }
 
-func (h *UserHandler) ListUsers(c *gin.Context) {
+func (h *userHandler) ListUsers(c *gin.Context) {
 	// TODO: Implement list users in database module
 	c.JSON(http.StatusNotImplemented, gin.H{
 		"error": "List users not implemented yet",
 	})
 }
 
-func (h *UserHandler) UpdateUser(c *gin.Context) {
+func (h *userHandler) UpdateUser(c *gin.Context) {
 	// TODO: Implement update user
 	c.JSON(http.StatusNotImplemented, gin.H{
 		"error": "Update user not implemented yet",
 	})
 }
 
-func (h *UserHandler) DeleteUser(c *gin.Context) {
+func (h *userHandler) DeleteUser(c *gin.Context) {
 	// TODO: Implement delete user
 	c.JSON(http.StatusNotImplemented, gin.H{
 		"error": "Delete user not implemented yet",

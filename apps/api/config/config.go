@@ -37,7 +37,7 @@ func Load() *Config {
 		NEO4J_PASSWORD: getEnv("NEO4J_PASSWORD", "password123"),
 
 		AppURL:       getEnv("APP_URL", "http://localhost:8080"),
-		CASServerURL: getEnv("CAS_SERVER_URL", "https://fed.princeton.edu/cas/"),
+		CASServerURL: getEnv("CAS_SERVER_URL", "https://fed.princeton.edu/cas"),
 		JWTSecret:    getEnv("JWT_SECRET", "your-secret-key-change-this-in-production"),
 		JWTExpiry:    time.Duration(jwtExpiryHours) * time.Hour,
 	}

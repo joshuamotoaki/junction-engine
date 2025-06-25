@@ -7,7 +7,7 @@ import (
 	"github.com/tigerappsorg/junction-engine/models"
 )
 
-func (db *Neo4jDB) CreateUser(ctx context.Context, user *models.User) error {
+func (db *neo4jDB) CreateUser(ctx context.Context, user *models.User) error {
 	session := db.Driver.NewSession(ctx, neo4j.SessionConfig{
 		AccessMode: neo4j.AccessModeWrite,
 	})
@@ -38,7 +38,7 @@ func (db *Neo4jDB) CreateUser(ctx context.Context, user *models.User) error {
 	return err
 }
 
-func (db *Neo4jDB) GetUserByNetID(ctx context.Context, netid string) (*models.User, error) {
+func (db *neo4jDB) GetUserByNetID(ctx context.Context, netid string) (*models.User, error) {
 	session := db.Driver.NewSession(ctx, neo4j.SessionConfig{
 		AccessMode: neo4j.AccessModeRead,
 	})

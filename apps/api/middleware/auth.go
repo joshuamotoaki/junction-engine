@@ -9,7 +9,7 @@ import (
 	"github.com/tigerappsorg/junction-engine/models"
 )
 
-func AuthMiddleware(casService *auth.CASService) gin.HandlerFunc {
+func AuthMiddleware(casService auth.CASService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Try to get token from Authorization header
 		authHeader := c.GetHeader("Authorization")
