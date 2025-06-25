@@ -12,7 +12,7 @@ type healthHandler struct {
 	db database.Neo4jDB
 }
 
-type HealthHandler interface{
+type HealthHandler interface {
 	Check(c *gin.Context)
 	DatabaseStatus(c *gin.Context)
 }

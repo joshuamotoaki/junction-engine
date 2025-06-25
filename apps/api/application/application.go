@@ -11,7 +11,7 @@ import (
 
 func Run(cfg *config.Config) {
 	// Neo4J
-	db, err := database.NewNeo4j(cfg.NEO4J_URI, cfg.NEO4J_USERNAME, cfg.NEO4J_PASSWORD)
+	db, err := database.NewNeo4j(cfg.Neo4jURI, cfg.Neo4jUsername, cfg.Neo4jPassword)
 	if err != nil {
 		log.Fatal("Failed to connect to Neo4j:", err)
 	}

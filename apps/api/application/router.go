@@ -11,6 +11,7 @@ import (
 
 type router struct {
 	engine        *gin.Engine
+	port          string
 	authHandler   handlers.AuthHandler
 	userHandler   handlers.UserHandler
 	healthHandler handlers.HealthHandler
@@ -25,9 +26,11 @@ type Router interface {
 
 func NewRouter(cfg *config.Config, db database.Neo4jDB, casService auth.CASService) Router {
 	engine := gin.Default()
+	engine.SetTrustedProxies(nil)
 
 	return &router{
 		engine:        engine,
+		port:          cfg.Port,
 		authHandler:   handlers.NewAuthHandler(casService, db, cfg),
 		userHandler:   handlers.NewUserHandler(db),
 		healthHandler: handlers.NewHealthHandler(db),
@@ -72,5 +75,5 @@ func (r *router) GetEngine() *gin.Engine {
 }
 
 func (r *router) Run() error {
-	return r.engine.Run()
+	return r.engine.Run(":" + r.port)
 }
