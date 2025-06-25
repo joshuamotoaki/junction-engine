@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-Clone the repoistory. Make sure you have Go installed. On MacOS, you can use Homebrew:
+Clone the repository. Make sure you have Go installed. On MacOS, you can use Homebrew:
 
 ```bash
 brew install go
