@@ -29,5 +29,7 @@ func main() {
 		log.Logger = zerolog.New(os.Stderr).With().Timestamp().Logger()
 	}
 
+	log.Info().Msgf("Log level set to %s", zerolog.GlobalLevel().String())
+
 	application.Run(cfg)
 }

@@ -14,8 +14,8 @@ func Run(cfg *config.Config) {
 	db, err := database.NewNeo4j(cfg.Neo4jURI, cfg.Neo4jUsername, cfg.Neo4jPassword)
 	if err != nil {
 		log.Fatal().Msgf("Failed to connect to Neo4j:", err)
-	} 
-	
+	}
+
 	defer db.Close(context.Background())
 
 	// CAS Authentication

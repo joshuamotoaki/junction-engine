@@ -29,7 +29,7 @@ func NewRouter(cfg *config.Config, db database.Neo4jDB, casService auth.CASServi
 		gin.SetMode(gin.DebugMode)
 	} else {
 		gin.SetMode(gin.ReleaseMode)
-	}	
+	}
 
 	engine := gin.Default()
 	engine.SetTrustedProxies(nil)

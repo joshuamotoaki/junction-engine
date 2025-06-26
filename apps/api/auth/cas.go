@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/rs/zerolog/log"
 	"github.com/tigerappsorg/junction-engine/config"
 	"github.com/tigerappsorg/junction-engine/models"
 )
@@ -55,16 +56,24 @@ func (c *casService) GetLogoutURL() string {
 // Validate a CAS ticket and returns user information
 func (c *casService) ValidateTicket(ticket string) (*models.User, error) {
 	serviceURL := c.appURL + "/auth/callback"
-	validateURL := fmt.Sprintf("%sp3/serviceValidate?service=%s&ticket=%s&format=json",
+	validateURL := fmt.Sprintf("%s/p3/serviceValidate?service=%s&ticket=%s&format=json",
 		c.casURL,
 		url.QueryEscape(serviceURL),
 		url.QueryEscape(ticket))
+
+	log.Debug().
+		Str("ticket", ticket).
+		Str("service_url", serviceURL).
+		Str("validate_url", validateURL).
+		Msg("Validating CAS ticket")
 
 	resp, err := http.Get(validateURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to validate ticket: %w", err)
 	}
 	defer resp.Body.Close()
+
+	log.Debug().Msgf("CAS validation response status: %s", resp.Status)
 
 	var casResp models.CASResponse
 	if err := json.NewDecoder(resp.Body).Decode(&casResp); err != nil {
@@ -82,7 +91,7 @@ func (c *casService) ValidateTicket(ticket string) (*models.User, error) {
 
 	auth := casResp.ServiceResponse.AuthenticationSuccess
 
-	// Extract class year from grouper groups
+	// Extract class year 
 	year := "Graduate"
 	for _, group := range auth.Attributes.GrouperGroups {
 		if strings.Contains(group, "PU:basis:classyear:") {
