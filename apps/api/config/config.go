@@ -38,8 +38,8 @@ func Load() *Config {
 	return &Config{
 		Debug:  getEnv("DEBUG", "false") == "true",
 		Env:    getEnv("ENV", "dev"),
-		Port:   getEnv("PORT", "8080"),
-		AppURL: getEnv("APP_URL", "http://localhost:8080"),
+		Port:   getEnv("PORT", "3000"),
+		AppURL: getEnv("APP_URL", "http://localhost:3000"),
 
 		Neo4jURI:      getEnv("NEO4J_URI", "bolt://localhost:7687"),
 		Neo4jUsername: getEnv("NEO4J_USERNAME", "neo4j"),

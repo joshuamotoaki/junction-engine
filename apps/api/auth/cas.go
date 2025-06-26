@@ -91,7 +91,7 @@ func (c *casService) ValidateTicket(ticket string) (*models.User, error) {
 
 	auth := casResp.ServiceResponse.AuthenticationSuccess
 
-	// Extract class year 
+	// Extract class year
 	year := "Graduate"
 	for _, group := range auth.Attributes.GrouperGroups {
 		if strings.Contains(group, "PU:basis:classyear:") {
