@@ -1,1 +1,19 @@
-npx lint-staged
+# Check if any staged files are in apps/api
+if git diff --cached --name-only | grep -q "^apps/api/"; then
+  echo "Files changed in apps/api, running make fmt..."
+  
+  ROOT_DIR=$(pwd)
+  cd apps/api && make fmt
+  cd "$ROOT_DIR"
+  git add -u apps/api/
+  
+  # Check if there are any staged changes left
+  if ! git diff --cached --quiet; then
+    echo "✓ Formatting complete, changes staged"
+  else
+    echo "Error: No changes remain after formatting. Aborting empty commit."
+    exit 1
+  fi
+else
+  echo "No files changed in apps/api, skipping make fmt"
+fi
