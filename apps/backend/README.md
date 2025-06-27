@@ -1,4 +1,6 @@
-# Junction Engine Backend API
+# Junction Engine Backend
+
+The Go-based backend for TigerJunction Engine.
 
 ## Getting Started
 
@@ -16,4 +18,63 @@ go mod tidy
 
 # Run a hot-reloading development server
 make dev
+```
+
+## Overview
+
+TODO
+
+### API
+
+TODO
+
+### Course Service
+
+TODO
+
+### Degree Service
+
+TODO
+
+### Eval Service
+
+TODO
+
+### Prereq Service
+
+TODO
+
+### Seat Service
+
+TODO
+
+## Folder Structure
+
+```
+backend/
+├── cmd/                         # Application/Service entry points (minimal main packages)
+├── internal/                    # Internal packages (not meant for public use)
+│   ├── api/
+│   │   ├── handlers/
+│   │   ├── middleware/
+│   │   ├── api.go
+│   │   └── router.go
+│   ├── database/
+│   │   ├── neo4j/
+│   │   └── redis/
+│   ├── services/
+│   │   ├── course-service/
+│   │   ├── degree-service/
+│   │   ├── eval-service/
+│   │   ├── prereq-service/
+│   │   └── seat-service/
+│   └── shared/
+│       ├── auth/
+│       ├── config/
+│       ├── helpers/
+│       └── models/
+├── pkg/                         # Public packages
+│   └── oit-client/
+├── go.mod
+└── go.sum
 ```
