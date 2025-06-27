@@ -4,11 +4,11 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tigerappsorg/junction-engine/database"
+	"github.com/tigerappsorg/junction-engine/internal/database/neo4j"
 )
 
 type userHandler struct {
-	db database.Neo4jDB
+	db neo4j.Neo4jDB
 }
 
 type UserHandler interface {
@@ -17,7 +17,7 @@ type UserHandler interface {
 	DeleteUser(c *gin.Context)
 }
 
-func NewUserHandler(db database.Neo4jDB) UserHandler {
+func NewUserHandler(db neo4j.Neo4jDB) UserHandler {
 	return &userHandler{
 		db: db,
 	}

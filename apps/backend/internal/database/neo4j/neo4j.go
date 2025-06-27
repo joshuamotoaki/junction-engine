@@ -1,4 +1,4 @@
-package database
+package neo4j
 
 import (
 	"context"
@@ -6,7 +6,7 @@ import (
 
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j/config"
-	"github.com/tigerappsorg/junction-engine/models"
+	"github.com/tigerappsorg/junction-engine/internal/shared/models"
 )
 
 type neo4jDB struct {

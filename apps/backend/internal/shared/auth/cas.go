@@ -10,8 +10,8 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/rs/zerolog/log"
-	"github.com/tigerappsorg/junction-engine/config"
-	"github.com/tigerappsorg/junction-engine/models"
+	"github.com/tigerappsorg/junction-engine/internal/shared/config"
+	"github.com/tigerappsorg/junction-engine/internal/shared/models"
 )
 
 type casService struct {

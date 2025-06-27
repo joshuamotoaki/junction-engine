@@ -5,8 +5,8 @@ import (
 
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
-	"github.com/tigerappsorg/junction-engine/application"
-	"github.com/tigerappsorg/junction-engine/config"
+	"github.com/tigerappsorg/junction-engine/internal/api"
+	"github.com/tigerappsorg/junction-engine/internal/shared/config"
 )
 
 func main() {
@@ -31,5 +31,5 @@ func main() {
 
 	log.Info().Msgf("Log level set to %s", zerolog.GlobalLevel().String())
 
-	application.Run(cfg)
+	api.Run(cfg)
 }

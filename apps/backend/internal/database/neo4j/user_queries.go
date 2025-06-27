@@ -1,10 +1,10 @@
-package database
+package neo4j
 
 import (
 	"context"
 
 	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
-	"github.com/tigerappsorg/junction-engine/models"
+	"github.com/tigerappsorg/junction-engine/internal/shared/models"
 )
 
 func (db *neo4jDB) CreateUser(ctx context.Context, user *models.User) error {

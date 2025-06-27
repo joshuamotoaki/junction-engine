@@ -1,12 +1,12 @@
-package application
+package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/tigerappsorg/junction-engine/auth"
-	"github.com/tigerappsorg/junction-engine/config"
-	"github.com/tigerappsorg/junction-engine/database"
-	"github.com/tigerappsorg/junction-engine/handlers"
-	"github.com/tigerappsorg/junction-engine/middleware"
+	"github.com/tigerappsorg/junction-engine/internal/api/handlers"
+	"github.com/tigerappsorg/junction-engine/internal/api/middleware"
+	"github.com/tigerappsorg/junction-engine/internal/database/neo4j"
+	"github.com/tigerappsorg/junction-engine/internal/shared/auth"
+	"github.com/tigerappsorg/junction-engine/internal/shared/config"
 )
 
 type router struct {
@@ -24,7 +24,7 @@ type Router interface {
 	Run() error
 }
 
-func NewRouter(cfg *config.Config, db database.Neo4jDB, casService auth.CASService) Router {
+func NewRouter(cfg *config.Config, db neo4j.Neo4jDB, casService auth.CASService) Router {
 	if cfg.Env == "dev" {
 		gin.SetMode(gin.DebugMode)
 	} else {

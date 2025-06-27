@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tigerappsorg/junction-engine/auth"
-	"github.com/tigerappsorg/junction-engine/models"
+	"github.com/tigerappsorg/junction-engine/internal/shared/auth"
+	"github.com/tigerappsorg/junction-engine/internal/shared/models"
 )
 
 func AuthMiddleware(casService auth.CASService) gin.HandlerFunc {

@@ -6,14 +6,14 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tigerappsorg/junction-engine/auth"
-	"github.com/tigerappsorg/junction-engine/config"
-	"github.com/tigerappsorg/junction-engine/database"
+	"github.com/tigerappsorg/junction-engine/internal/database/neo4j"
+	"github.com/tigerappsorg/junction-engine/internal/shared/auth"
+	"github.com/tigerappsorg/junction-engine/internal/shared/config"
 )
 
 type authHandler struct {
 	casService auth.CASService
-	db         database.Neo4jDB
+	db         neo4j.Neo4jDB
 	config     *config.Config
 }
 
@@ -24,7 +24,7 @@ type AuthHandler interface {
 	Profile(c *gin.Context)
 }
 
-func NewAuthHandler(casService auth.CASService, db database.Neo4jDB, cfg *config.Config) AuthHandler {
+func NewAuthHandler(casService auth.CASService, db neo4j.Neo4jDB, cfg *config.Config) AuthHandler {
 	return &authHandler{
 		casService: casService,
 		db:         db,

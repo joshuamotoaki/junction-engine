@@ -5,11 +5,11 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/tigerappsorg/junction-engine/database"
+	"github.com/tigerappsorg/junction-engine/internal/database/neo4j"
 )
 
 type healthHandler struct {
-	db database.Neo4jDB
+	db neo4j.Neo4jDB
 }
 
 type HealthHandler interface {
@@ -17,7 +17,7 @@ type HealthHandler interface {
 	DatabaseStatus(c *gin.Context)
 }
 
-func NewHealthHandler(db database.Neo4jDB) HealthHandler {
+func NewHealthHandler(db neo4j.Neo4jDB) HealthHandler {
 	return &healthHandler{
 		db: db,
 	}
