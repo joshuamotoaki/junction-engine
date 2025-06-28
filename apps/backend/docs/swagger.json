@@ -1,0 +1,101 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is your API description",
+        "title": "Junction Engine API",
+        "contact": {
+            "name": "TigerApps",
+            "url": "https://tigerapps.org",
+            "email": "it.admin@tigerapps.org"
+        },
+        "license": {
+            "name": "BSD 3-Clause License",
+            "url": "https://opensource.org/licenses/BSD-3-Clause"
+        },
+        "version": "1.0"
+    },
+    "host": "junction.tigerapps.org",
+    "basePath": "/api/v1",
+    "paths": {
+        "/auth/callback": {
+            "get": {
+                "description": "Handles CAS callback and generates JWT token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "CAS Callback",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "CAS Ticket",
+                        "name": "ticket",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "get": {
+                "description": "Redirects to CAS login page",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Login with CAS",
+                "responses": {
+                    "302": {
+                        "description": "Found"
+                    }
+                }
+            }
+        }
+    }
+}

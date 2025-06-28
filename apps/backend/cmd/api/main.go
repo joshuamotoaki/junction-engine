@@ -9,6 +9,18 @@ import (
 	"github.com/tigerappsorg/junction-engine/internal/shared/config"
 )
 
+// Main entry point for the Junction Engine API.
+//
+//	@title			Junction Engine API
+//	@version		1.0
+//	@description	This is your API description
+//	@contact.name	TigerApps
+//	@contact.url	https://tigerapps.org
+//	@contact.email	it.admin@tigerapps.org
+//	@license.name	BSD 3-Clause License
+//	@license.url	https://opensource.org/licenses/BSD-3-Clause
+//	@host			junction.tigerapps.org
+//	@BasePath		/api/v1
 func main() {
 	cfg := config.Load()
 

@@ -1,0 +1,68 @@
+basePath: /api/v1
+host: junction.tigerapps.org
+info:
+  contact:
+    email: it.admin@tigerapps.org
+    name: TigerApps
+    url: https://tigerapps.org
+  description: This is your API description
+  license:
+    name: BSD 3-Clause License
+    url: https://opensource.org/licenses/BSD-3-Clause
+  title: Junction Engine API
+  version: "1.0"
+paths:
+  /auth/callback:
+    get:
+      consumes:
+      - application/json
+      description: Handles CAS callback and generates JWT token
+      parameters:
+      - description: CAS Ticket
+        in: query
+        name: ticket
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: CAS Callback
+      tags:
+      - auth
+  /auth/login:
+    get:
+      consumes:
+      - application/json
+      description: Redirects to CAS login page
+      produces:
+      - application/json
+      responses:
+        "302":
+          description: Found
+      summary: Login with CAS
+      tags:
+      - auth
+swagger: "2.0"

@@ -14,10 +14,7 @@ func AuthMiddleware(casService auth.CASService) gin.HandlerFunc {
 		// Try to get token from Authorization header
 		authHeader := c.GetHeader("Authorization")
 		if authHeader == "" {
-			c.JSON(http.StatusUnauthorized, gin.H{
-				"error":     "Authorization header required",
-				"login_url": casService.GetLoginURL(),
-			})
+			c.Redirect(http.StatusFound, casService.GetLoginURL())
 			c.Abort()
 			return
 		}

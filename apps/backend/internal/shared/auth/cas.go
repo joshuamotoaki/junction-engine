@@ -32,7 +32,7 @@ type CASService interface {
 }
 
 func NewCASService(cfg *config.Config) CASService {
-	loginUrl := fmt.Sprintf("%s/login?service=%s", cfg.CASServerURL, url.QueryEscape(cfg.AppURL+"/auth/callback"))
+	loginUrl := fmt.Sprintf("%s/login?service=%s", cfg.CASServerURL, url.QueryEscape(cfg.AppURL+"/api/v1/auth/callback"))
 	logoutUrl := fmt.Sprintf("%s/logout", cfg.CASServerURL)
 
 	return &casService{
@@ -55,7 +55,7 @@ func (c *casService) GetLogoutURL() string {
 
 // Validate a CAS ticket and returns user information
 func (c *casService) ValidateTicket(ticket string) (*models.User, error) {
-	serviceURL := c.appURL + "/auth/callback"
+	serviceURL := c.appURL + "/api/v1/auth/callback"
 	validateURL := fmt.Sprintf("%s/p3/serviceValidate?service=%s&ticket=%s&format=json",
 		c.casURL,
 		url.QueryEscape(serviceURL),

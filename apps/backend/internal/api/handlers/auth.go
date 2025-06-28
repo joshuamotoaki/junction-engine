@@ -32,10 +32,28 @@ func NewAuthHandler(casService auth.CASService, db neo4j.Neo4jDB, cfg *config.Co
 	}
 }
 
+// @Summary		Login with CAS
+// @Description	Redirects to CAS login page
+// @Tags			auth
+// @Accept			json
+// @Produce		json
+// @Success		302
+// @Router			/auth/login [get]
 func (h *authHandler) Login(c *gin.Context) {
 	c.Redirect(http.StatusFound, h.casService.GetLoginURL())
 }
 
+// @Summary		CAS Callback
+// @Description	Handles CAS callback and generates JWT token
+// @Tags			auth
+// @Accept			json
+// @Produce		json
+// @Param			ticket	query		string	true	"CAS Ticket"
+// @Success		200		{object}	map[string]interface{}
+// @Failure		400		{object}	map[string]string	"Bad Request"
+// @Failure		401		{object}	map[string]string	"Unauthorized"
+// @Failure		500		{object}	map[string]string	"Internal Server Error"
+// @Router			/auth/callback [get]
 func (h *authHandler) Callback(c *gin.Context) {
 	ticket := c.Query("ticket")
 	if ticket == "" {

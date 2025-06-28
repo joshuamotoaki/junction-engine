@@ -2,6 +2,9 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	_ "github.com/tigerappsorg/junction-engine/docs" // Import generated docs for Swagger
 	"github.com/tigerappsorg/junction-engine/internal/api/handlers"
 	"github.com/tigerappsorg/junction-engine/internal/api/middleware"
 	"github.com/tigerappsorg/junction-engine/internal/database/neo4j"
@@ -45,34 +48,25 @@ func NewRouter(cfg *config.Config, db neo4j.Neo4jDB, casService auth.CASService)
 }
 
 func (r *router) SetupRoutes() {
-	r.setupPublicRoutes()
-	r.setupAuthRoutes()
-	r.setupProtectedRoutes()
-}
-
-func (r *router) setupPublicRoutes() {
-	public := r.engine.Group("/")
+	api := r.engine.Group("/api/v1")
 	{
-		public.GET("/health", r.healthHandler.Check)
-		public.GET("/health/database", r.healthHandler.DatabaseStatus)
-	}
-}
+		api.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+		api.GET("/health", r.healthHandler.Check)
+		api.GET("/health/database", r.healthHandler.DatabaseStatus)
 
-func (r *router) setupAuthRoutes() {
-	auth := r.engine.Group("/auth")
-	{
-		auth.GET("/login", r.authHandler.Login)
-		auth.GET("/callback", r.authHandler.Callback)
-		auth.GET("/logout", r.authHandler.Logout)
-	}
-}
+		auth := api.Group("/auth")
+		{
+			auth.GET("/login", r.authHandler.Login)
+			auth.GET("/callback", r.authHandler.Callback)
+			auth.GET("/logout", r.authHandler.Logout)
+		}
 
-func (r *router) setupProtectedRoutes() {
-	protected := r.engine.Group("/api")
-	protected.Use(middleware.AuthMiddleware(r.casService))
-	{
-		// Auth endpoints
-		protected.GET("/profile", r.authHandler.Profile)
+		// Protected routes
+		protected := api.Group("")
+		protected.Use(middleware.AuthMiddleware(r.casService))
+		{
+			protected.GET("/profile", r.authHandler.Profile)
+		}
 	}
 }
 

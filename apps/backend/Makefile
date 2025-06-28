@@ -1,4 +1,4 @@
-.PHONY: run dev build start clean db-up db-down db-logs db-reset fmt lint
+.PHONY: dev dev-cli run run-cli build build-api build-cli start cli clean db-up db-down db-logs db-reset fmt lint docs
 
 
 # Run in development mode with hot reloading
@@ -56,6 +56,10 @@ db-reset:
 
 fmt:
 	go fmt ./...
+	swag fmt ./...
 
 lint:
 	golangci-lint run --timeout 5m
+
+docs: 
+	swag init -g cmd/api/main.go
