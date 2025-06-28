@@ -52,7 +52,9 @@ TODO
 
 ```
 backend/
-├── cmd/                         # Application/Service entry points (minimal main packages)
+├── cmd/                         # API/CLI entry points (minimal main packages)
+├── ├── api/
+│   └── cli/
 ├── internal/                    # Internal packages (not meant for public use)
 │   ├── api/
 │   │   ├── handlers/
