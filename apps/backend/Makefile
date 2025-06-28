@@ -3,20 +3,36 @@
 
 # Run in development mode with hot reloading
 dev: db-up
-	air
+	air -c air-api.toml
+
+dev-cli: db-up
+	air -c air-cli.toml
 
 # Run in development mode (no hot reloading)
 run: 
-	go run main.go
+	go run cmd/api/main.go
 
-build:
-	go build -o junction-engine main.go
+run-cli:
+	go run cmd/cli/main.go
+
+# Build the API and CLI binaries
+build: build-api build-cli
+
+build-api: 
+	go build -o tmp/api ./cmd/api
+
+build-cli:
+	go build -o tmp/cli ./cmd/cli
 
 start: build 
-	./junction-engine
+	./tmp/api
+
+cli: build-cli
+	./tmp/cli
 
 clean:
-	rm -f junction-engine
+	rm -f tmp/api
+	rm -f tmp/cli
 
 db-up:
 	@docker compose up -d neo4j
