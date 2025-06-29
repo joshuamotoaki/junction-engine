@@ -26,8 +26,8 @@ type casService struct {
 type CASService interface {
 	GetLoginURL() string
 	GetLogoutURL() string
-	ValidateTicket(ticket string) (*models.User, error)
-	GenerateJWT(user *models.User) (string, error)
+	ValidateTicket(ticket string) (*models.CasUser, error)
+	GenerateJWT(user *models.CasUser) (string, error)
 	ValidateJWT(tokenString string) (*models.JWTClaims, error)
 }
 
@@ -54,7 +54,7 @@ func (c *casService) GetLogoutURL() string {
 }
 
 // Validate a CAS ticket and returns user information
-func (c *casService) ValidateTicket(ticket string) (*models.User, error) {
+func (c *casService) ValidateTicket(ticket string) (*models.CasUser, error) {
 	serviceURL := c.appURL + "/api/v1/auth/callback"
 	validateURL := fmt.Sprintf("%s/p3/serviceValidate?service=%s&ticket=%s&format=json",
 		c.casURL,
@@ -114,7 +114,7 @@ func (c *casService) ValidateTicket(ticket string) (*models.User, error) {
 		email = auth.Attributes.Mail[0]
 	}
 
-	return &models.User{
+	return &models.CasUser{
 		NetID:     auth.User,
 		Name:      displayName,
 		Email:     email,
@@ -124,7 +124,7 @@ func (c *casService) ValidateTicket(ticket string) (*models.User, error) {
 }
 
 // Create a JWT token for the user
-func (c *casService) GenerateJWT(user *models.User) (string, error) {
+func (c *casService) GenerateJWT(user *models.CasUser) (string, error) {
 	claims := models.JWTClaims{
 		NetID: user.NetID,
 		Email: user.Email,

@@ -17,7 +17,7 @@ type Neo4jDB interface {
 	Close(ctx context.Context) error
 	HealthCheck(ctx context.Context) error
 
-	CreateUser(ctx context.Context, user *models.User) error
+	CreateUser(ctx context.Context, user *models.CasUser) error
 }
 
 func NewNeo4j(uri, username, password string) (Neo4jDB, error) {

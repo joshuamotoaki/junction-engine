@@ -7,7 +7,9 @@ import (
 	"github.com/tigerappsorg/junction-engine/internal/shared/models"
 )
 
-func (db *neo4jDB) CreateUser(ctx context.Context, user *models.User) error {
+// CreateUser adds a new user to the database or merges with a legacy account
+// In the event of a legacy account, it updates the user information
+func (db *neo4jDB) CreateUser(ctx context.Context, user *models.CasUser) error {
 	session := db.Driver.NewSession(ctx, neo4j.SessionConfig{
 		AccessMode: neo4j.AccessModeWrite,
 	})
